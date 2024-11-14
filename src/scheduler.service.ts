@@ -6,10 +6,10 @@ import { Agenda } from 'agenda';
 export class SchedulerService implements OnModuleInit {
   private agenda: Agenda;
 
-  constructor(private readonly prisma: PrismaService) {
+    constructor(private readonly prisma: PrismaService) {
     this.agenda = new Agenda({
       db: {
-        address: 'mongodb://localhost:27017/agenda', // MongoDB address for storing agenda jobs
+        address: process.env.MONGO_URL,
         collection: 'jobs',
       },
     });
