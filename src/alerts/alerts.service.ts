@@ -4,34 +4,30 @@ import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class AlertsService {
-  constructor(private readonly databaseService: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async create(createAlertDto: Prisma.AlertsMasterCreateInput) {
-    return this.databaseService.alertsMaster.create({ data: createAlertDto });
+    return this.prisma.alertsMaster.create({ data: createAlertDto });
   }
-
-  async createSubscription(createAlertSubscriptionDto: Prisma.AlertsSubscriptionCreateInput) {
-    return this.databaseService.alertsSubscription.create({ data: createAlertSubscriptionDto });
-  }
-
+  
   async findAll(entityType?: 'DEVICE' | 'APP') {
     if (entityType)
-      return this.databaseService.alertsMaster.findMany({ where: { entityType } });
-    return this.databaseService.alertsMaster.findMany();
+      return this.prisma.alertsMaster.findMany({ where: { entityType } });
+    return this.prisma.alertsMaster.findMany();
   }
 
   async findOne(id: string) {
-    return this.databaseService.alertsMaster.findUnique({ where: { id } });
+    return this.prisma.alertsMaster.findUnique({ where: { id } });
   }
 
   async update(id: string, updateAlertDto: Prisma.AlertsMasterUpdateInput) {
-    return this.databaseService.alertsMaster.update({
+    return this.prisma.alertsMaster.update({
       where: { id },
       data: updateAlertDto,
     });
   }
 
   async remove(id: string) {
-    return this.databaseService.alertsMaster.delete({ where: { id } });
+    return this.prisma.alertsMaster.delete({ where: { id } });
   }
 }

@@ -43,13 +43,13 @@ export class SchedulerService implements OnModuleInit {
     const timeDiff = currentTime.getTime() - new Date(subscription.lastExecutedAt).getTime();
     const frequency = subscription.alert.frequency;
     var frequencyInMins = 1 * 60 * 10000  // 1 min = 1 * 60 * 1000
-    if (frequency === 'hourly') {
+    if (frequency === 'HOURLY') {
         frequencyInMins = 2 * 60 * 1000   // 1 hour = 1 * 60 * 60 * 1000 ms
     }
-    else if (frequency === 'daily') {
+    else if (frequency === 'DAILY') {
         frequencyInMins = 4 * 60 * 1000  // 1 day = 1 * 24 * 60 * 60 * 1000 ms
     }
-    else if (frequency === 'weekly') {
+    else if (frequency === 'WEEKLY') {
         frequencyInMins = 6 * 60 * 1000 // 1 week = 1 * 7 * 24 * 60 * 60 * 1000 ms
     }
     return timeDiff >= frequencyInMins;

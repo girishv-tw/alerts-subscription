@@ -36,7 +36,7 @@ export class AlertsController {
   @ApiQuery({
     name: 'entityType',
     type: String,
-    description: 'AentityType',
+    description: 'entityType',
     required: false,
   })
   findAll(@Query('entityType') entityType?: 'DEVICE' | 'APP') {
@@ -75,20 +75,4 @@ export class AlertsController {
   remove(@Param('id') id: string) {
     return this.alertsService.remove(id);
   }
-
-  @Post('subscribe')
-  @ApiBody({
-    schema: {
-      type: 'object',
-      properties: {
-        alertId: { type: 'string', example: 'ffd4d227-b4af-4974-bd76-812017d1f77d' },
-        userId: { type: 'string', example: 'abcd123' },
-        orgId: { type: 'string', example: '123' },
-      },
-    },
-  })
-  createSubscription(@Body() createAlertSubscriptionDto: Prisma.AlertsSubscriptionCreateInput) {
-    return this.alertsService.createSubscription(createAlertSubscriptionDto);
-  }
-
 }
