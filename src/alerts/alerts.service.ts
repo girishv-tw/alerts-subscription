@@ -10,9 +10,7 @@ export class AlertsService {
     return this.prisma.alertsMaster.create({ data: createAlertDto });
   }
   
-  async findAll(entityType?: 'DEVICE' | 'APP') {
-    if (entityType)
-      return this.prisma.alertsMaster.findMany({ where: { entityType } });
+  async findAll() {
     return this.prisma.alertsMaster.findMany();
   }
 

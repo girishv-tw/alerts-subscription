@@ -34,24 +34,6 @@ export class SubscriptionController {
     return this.subscriptionService.findSubscribedAlertsForUserAndOrg(orgId, userId);
   }
 
-  // @Get('subscribedAlerts')
-  // @ApiQuery({
-  //   name: 'orgId',
-  //   type: String,
-  //   description: 'Organisation Id',
-  //   required: false,
-  // })
-  // @ApiQuery({
-  //   name: 'userId',
-  //   type: String,
-  //   description: 'User Id',
-  //   required: false,
-  // })
-  // findSubscribedAlertsForUserAndOrg() {
-  //   console.log('in function.....');
-  //   return this.alertsService.findSubscribedAlertsForUserAndOrg();
-  // }
-
   @Post()
   @ApiBody({
     schema: {
@@ -60,6 +42,13 @@ export class SubscriptionController {
         alertId: { type: 'string', example: 'ffd4d227-b4af-4974-bd76-812017d1f77d' },
         userId: { type: 'string', example: 'abcd123' },
         orgId: { type: 'string', example: '123' },
+        parameters: {
+          type: 'object',
+          properties: {
+            entity_type: { type: 'string', example: 'DEVICE' },
+            frequency: { type: 'string', example: 'DAILY' },
+          },
+        },
       },
     },
   })

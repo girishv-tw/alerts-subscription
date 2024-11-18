@@ -8,21 +8,21 @@ generator client {
 }
 
 model AlertsMaster {
-  id          String   @id @default(uuid())
-  name        String
-  description String
-  entityType  String
-  frequency   String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  subscriptions AlertsSubscription[]
+  id                  String   @id @default(uuid())
+  name                String
+  description         String
+  default_parameters  Json
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  subscriptions       AlertsSubscription[]
 }
 
 model AlertsSubscription {
-  id              String   @id @default(uuid())
+  id              Int   @id @default(autoincrement())
   userId          String
   orgId           String
   alertId         String
+  parameters      Json
   lastExecutedAt  DateTime?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt

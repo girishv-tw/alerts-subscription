@@ -23,8 +23,13 @@ export class AlertsController {
       properties: {
         name: { type: 'string', example: 'MacBook Alert' },
         description: { type: 'string', example: 'Device is 3 years old' },
-        entityType: { type: 'string', example: 'DEVICE' },
-        frequency: { type: 'string', example: 'daily' },
+        default_parameters: {
+          type: 'object',
+          properties: {
+            entity_type: { type: 'string', example: 'DEVICE' },
+            frequency: { type: 'string', example: 'DAILY' },
+          },
+        },
       },
     },
   })
@@ -39,8 +44,8 @@ export class AlertsController {
     description: 'entityType',
     required: false,
   })
-  findAll(@Query('entityType') entityType?: 'DEVICE' | 'APP') {
-    return this.alertsService.findAll(entityType);
+  findAll() {
+    return this.alertsService.findAll();
   }
 
   @Get(':id')
@@ -53,14 +58,15 @@ export class AlertsController {
     schema: {
       type: 'object',
       properties: {
-        name: { type: 'string', example: 'Google workspace', nullable: true },
-        description: {
-          type: 'string',
-          example: 'License expires in 10 days',
-          nullable: true,
+        name: { type: 'string', example: 'MacBook Alert' },
+        description: { type: 'string', example: 'Device is 3 years old' },
+        default_parameters: {
+          type: 'object',
+          properties: {
+            entity_type: { type: 'string', example: 'DEVICE' },
+            frequency: { type: 'string', example: 'DAILY' },
+          },
         },
-        entityType: { type: 'string', example: 'APP', nullable: true },
-        frequency: { type: 'string', example: 'weekly', nullable: true },
       },
     },
   })
